@@ -10,6 +10,7 @@ create table if not exists Funcionario(
 
 create table if not exists Cliente(
 	id BIGINT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    cpf VARCHAR(256),
     nome VARCHAR(256),
     telefone VARCHAR(15),
 	email VARCHAR(256),
