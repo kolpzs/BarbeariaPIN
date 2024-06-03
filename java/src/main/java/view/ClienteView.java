@@ -54,7 +54,7 @@ public class ClienteView {
                     break;
                 case 6:
                     System.out.println("Saindo do menu de clientes.");
-                    return;
+                    break;
             }
         } while(resposta != 6);
     }
