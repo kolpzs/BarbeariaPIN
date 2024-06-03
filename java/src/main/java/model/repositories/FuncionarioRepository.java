@@ -1,6 +1,6 @@
 package model.repositories;
 
-import model.entities.Funcionario;
+import model.entities.FuncionarioEntity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -19,47 +19,47 @@ public class FuncionarioRepository implements BasicCrud {
     }
 
     @Override
-    public Funcionario create(Object object) {
-        Funcionario funcionario = (Funcionario) object;
+    public FuncionarioEntity create(Object object) {
+        FuncionarioEntity funcionarioEntity = (FuncionarioEntity) object;
         em.getTransaction().begin();
-        em.persist(funcionario);
+        em.persist(funcionarioEntity);
         em.getTransaction().commit();
-        return funcionario;
+        return funcionarioEntity;
     }
 
     @Override
-    public Funcionario findById(Long id) {
-        return em.find(Funcionario.class, id);
+    public FuncionarioEntity findById(Long id) {
+        return em.find(FuncionarioEntity.class, id);
     }
 
     @Override
-    public Funcionario updateById(Object object) {
-        Funcionario funcionario = (Funcionario) object;
+    public FuncionarioEntity updateById(Object object) {
+        FuncionarioEntity funcionarioEntity = (FuncionarioEntity) object;
         em.getTransaction().begin();
-        Funcionario updatedFuncionario = em.merge(funcionario);
+        FuncionarioEntity updatedFuncionarioEntity = em.merge(funcionarioEntity);
         em.getTransaction().commit();
-        return updatedFuncionario;
+        return updatedFuncionarioEntity;
     }
 
     @Override
     public void delete(Long id) {
-        Funcionario funcionario = findById(id);
-        if (funcionario != null) {
+        FuncionarioEntity funcionarioEntity = findById(id);
+        if (funcionarioEntity != null) {
             em.getTransaction().begin();
-            em.remove(funcionario);
+            em.remove(funcionarioEntity);
             em.getTransaction().commit();
         }
     }
 
     @Override
-    public List<Funcionario> findAll() {
-        TypedQuery<Funcionario> query = em.createQuery("SELECT f FROM Funcionario f", Funcionario.class);
+    public List<FuncionarioEntity> findAll() {
+        TypedQuery<FuncionarioEntity> query = em.createQuery("SELECT f FROM Funcionario f", FuncionarioEntity.class);
         return query.getResultList();
     }
 
-    public Funcionario findByNome(String nome) {
+    public FuncionarioEntity findByNome(String nome) {
         try {
-            TypedQuery<Funcionario> query = em.createQuery("SELECT f FROM Funcionario f WHERE f.nome = :nome", Funcionario.class);
+            TypedQuery<FuncionarioEntity> query = em.createQuery("SELECT f FROM Funcionario f WHERE f.nome = :nome", FuncionarioEntity.class);
             query.setParameter("nome", nome);
             return query.getSingleResult();
         } catch (NoResultException e) {

@@ -7,7 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
-import model.entities.Cliente;
+import model.entities.ClienteEntity;
 
 public class ClienteRepository implements BasicCrud {
 
@@ -19,41 +19,41 @@ public class ClienteRepository implements BasicCrud {
     }
 
     @Override
-    public Cliente create(Object object) {
-        Cliente cliente = (Cliente) object;
+    public ClienteEntity create(Object object) {
+        ClienteEntity clienteEntity = (ClienteEntity) object;
         em.getTransaction().begin();
-        em.persist(cliente);
+        em.persist(clienteEntity);
         em.getTransaction().commit();
-        return cliente;
+        return clienteEntity;
     }
 
     @Override
-    public Cliente findById(Long id) {
-        return em.find(Cliente.class, id);
+    public ClienteEntity findById(Long id) {
+        return em.find(ClienteEntity.class, id);
     }
 
     @Override
-    public Cliente updateById(Object object) {
-        Cliente cliente = (Cliente) object;
+    public ClienteEntity updateById(Object object) {
+        ClienteEntity clienteEntity = (ClienteEntity) object;
         em.getTransaction().begin();
-        Cliente updatedCliente = em.merge(cliente);
+        ClienteEntity updatedClienteEntity = em.merge(clienteEntity);
         em.getTransaction().commit();
-        return updatedCliente;
+        return updatedClienteEntity;
     }
 
     @Override
     public void delete(Long id) {
-        Cliente cliente = findById(id);
-        if (cliente != null) {
+        ClienteEntity clienteEntity = findById(id);
+        if (clienteEntity != null) {
             em.getTransaction().begin();
-            em.remove(cliente);
+            em.remove(clienteEntity);
             em.getTransaction().commit();
         }
     }
 
     @Override
-    public List<Cliente> findAll() {
-        TypedQuery<Cliente> query = em.createQuery("SELECT c FROM Cliente c", Cliente.class);
+    public List<ClienteEntity> findAll() {
+        TypedQuery<ClienteEntity> query = em.createQuery("SELECT c FROM Cliente c", ClienteEntity.class);
         return query.getResultList();
     }
 }

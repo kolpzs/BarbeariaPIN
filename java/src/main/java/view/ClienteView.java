@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import controller.ClienteController;
-import model.entities.Cliente;
+import model.entities.ClienteEntity;
 
 public class ClienteView {
 
@@ -56,8 +56,8 @@ public class ClienteView {
         System.out.print("Preferência: ");
         String preferencia = scanner.nextLine();
         try {
-            Cliente novoCliente = clienteController.criarCliente(nome, telefone, cpf, email, preferencia);
-            if (novoCliente != null) {
+            ClienteEntity novoClienteEntity = clienteController.criarCliente(nome, telefone, cpf, email, preferencia);
+            if (novoClienteEntity != null) {
                 System.out.println("Cliente criado com sucesso!");
             } else {
                 System.out.println("Falha ao criar cliente. Talvez o CPF já esteja em uso.");
@@ -68,13 +68,13 @@ public class ClienteView {
     }
 
     private void visualizarTodosClientes() {
-        List<Cliente> clientes = clienteController.buscarTodosClientes();
-        if (clientes.isEmpty()) {
+        List<ClienteEntity> clienteEntities = clienteController.buscarTodosClientes();
+        if (clienteEntities.isEmpty()) {
             System.out.println("Nenhum cliente encontrado.");
         } else {
             System.out.println("Lista de Clientes:");
-            for (Cliente cliente : clientes) {
-                System.out.println("ID: " + cliente.getId() + ", Nome: " + cliente.getNome() + ", CPF: " + cliente.getCpf());
+            for (ClienteEntity clienteEntity : clienteEntities) {
+                System.out.println("ID: " + clienteEntity.getId() + ", Nome: " + clienteEntity.getNome() + ", CPF: " + clienteEntity.getCpf());
             }
         }
     }

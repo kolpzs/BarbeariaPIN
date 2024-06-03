@@ -2,7 +2,7 @@ package model.services;
 
 import java.util.List;
 
-import model.entities.Funcionario;
+import model.entities.FuncionarioEntity;
 import model.repositories.FuncionarioRepository;
 
 public class FuncionarioService {
@@ -13,7 +13,7 @@ public class FuncionarioService {
         this.funcionarioRepository = funcionarioRepository;
     }
 
-    public Funcionario criarFuncionario(String nome, String login, String senha) throws Exception {
+    public FuncionarioEntity criarFuncionario(String nome, String login, String senha) throws Exception {
         if (funcionarioRepository.findByNome(nome) != null) {
             return null;
         }
@@ -22,15 +22,15 @@ public class FuncionarioService {
             return null;
         }
 
-        Funcionario novoFuncionario = new Funcionario(nome, login, senha);
-        return (Funcionario) funcionarioRepository.create(novoFuncionario);
+        FuncionarioEntity novoFuncionarioEntity = new FuncionarioEntity(nome, login, senha);
+        return (FuncionarioEntity) funcionarioRepository.create(novoFuncionarioEntity);
     }
 
-    public Funcionario findById(Long id) {
+    public FuncionarioEntity findById(Long id) {
         return funcionarioRepository.findById(id);
     }
     
-    public List<Funcionario> findAll() {
+    public List<FuncionarioEntity> findAll() {
         return funcionarioRepository.findAll();
     }
     

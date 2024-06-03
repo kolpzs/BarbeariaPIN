@@ -2,7 +2,7 @@ package controller;
 
 import java.util.List;
 
-import model.entities.Servico;
+import model.entities.ServicoEntity;
 import model.services.ServicoService;
 
 public class ServicoController {
@@ -13,13 +13,13 @@ public class ServicoController {
         this.servicoService = new ServicoService();
     }
 
-    public Servico criarServico(String nome) {
+    public ServicoEntity criarServico(String nome) {
         try {
-            Servico novoServico = new Servico();
-            novoServico.setNome(nome);
-            boolean created = servicoService.createServico(novoServico);
+            ServicoEntity novoServicoEntity = new ServicoEntity();
+            novoServicoEntity.setNome(nome);
+            boolean created = servicoService.createServico(novoServicoEntity);
             if (created) {
-                return novoServico;
+                return novoServicoEntity;
             } else {
                 throw new RuntimeException("Nome do serviço já existe");
             }
@@ -28,11 +28,11 @@ public class ServicoController {
         }
     }
 
-    public Servico buscarServico(Long id) {
+    public ServicoEntity buscarServico(Long id) {
         return servicoService.findById(id);
     }
 
-    public List<Servico> buscarTodosServicos() {
+    public List<ServicoEntity> buscarTodosServicos() {
         return servicoService.findAll();
     }
 }

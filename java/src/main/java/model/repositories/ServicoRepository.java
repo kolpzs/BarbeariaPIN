@@ -6,7 +6,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
-import model.entities.Servico;
+import model.entities.ServicoEntity;
 
 public class ServicoRepository implements BasicCrud {
 
@@ -18,11 +18,11 @@ public class ServicoRepository implements BasicCrud {
     }
 
     @Override
-    public Servico create(Object object) {
-        Servico servico = (Servico) object;
+    public ServicoEntity create(Object object) {
+        ServicoEntity servicoEntity = (ServicoEntity) object;
         try {
             em.getTransaction().begin();
-            em.persist(servico);
+            em.persist(servicoEntity);
             em.getTransaction().commit();
         } catch (Exception e) {
             if (em.getTransaction().isActive()) {
@@ -30,20 +30,20 @@ public class ServicoRepository implements BasicCrud {
             }
             e.printStackTrace();
         }
-        return servico;
+        return servicoEntity;
     }
 
     @Override
-    public Servico findById(Long id) {
-        return em.find(Servico.class, id);
+    public ServicoEntity findById(Long id) {
+        return em.find(ServicoEntity.class, id);
     }
 
     @Override
-    public Servico updateById(Object object) {
-        Servico servico = (Servico) object;
+    public ServicoEntity updateById(Object object) {
+        ServicoEntity servicoEntity = (ServicoEntity) object;
         try {
             em.getTransaction().begin();
-            em.merge(servico);
+            em.merge(servicoEntity);
             em.getTransaction().commit();
         } catch (Exception e) {
             if (em.getTransaction().isActive()) {
@@ -51,16 +51,16 @@ public class ServicoRepository implements BasicCrud {
             }
             e.printStackTrace();
         }
-        return servico;
+        return servicoEntity;
     }
 
     @Override
     public void delete(Long id) {
         try {
             em.getTransaction().begin();
-            Servico servico = em.find(Servico.class, id);
-            if (servico != null) {
-                em.remove(servico);
+            ServicoEntity servicoEntity = em.find(ServicoEntity.class, id);
+            if (servicoEntity != null) {
+                em.remove(servicoEntity);
             }
             em.getTransaction().commit();
         } catch (Exception e) {
@@ -72,8 +72,8 @@ public class ServicoRepository implements BasicCrud {
     }
 
     @Override
-    public List<Servico> findAll() {
-        TypedQuery<Servico> query = em.createQuery("SELECT s FROM Servico s", Servico.class);
+    public List<ServicoEntity> findAll() {
+        TypedQuery<ServicoEntity> query = em.createQuery("SELECT s FROM Servico s", ServicoEntity.class);
         return query.getResultList();
     }
 }

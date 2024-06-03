@@ -2,7 +2,7 @@ package controller;
 
 import java.util.List;
 
-import model.entities.Cliente;
+import model.entities.ClienteEntity;
 import model.services.ClienteService;
 
 public class ClienteController {
@@ -13,20 +13,20 @@ public class ClienteController {
         this.clienteService = new ClienteService();
     }
 
-    public Cliente criarCliente(String nome, String telefone, String cpf, String email, String preferencia) {
+    public ClienteEntity criarCliente(String nome, String telefone, String cpf, String email, String preferencia) {
         try {
-            Cliente novoCliente = new Cliente(nome, telefone, cpf, email, preferencia);
-            return clienteService.createCliente(novoCliente);
+            ClienteEntity novoClienteEntity = new ClienteEntity(nome, telefone, cpf, email, preferencia);
+            return clienteService.createCliente(novoClienteEntity);
         } catch (Exception e) {
             throw new RuntimeException("Erro ao criar cliente", e);
         }
     }
 
-    public Cliente buscarCliente(Long id) {
+    public ClienteEntity buscarCliente(Long id) {
         return clienteService.findClienteById(id);
     }
 
-    public List<Cliente> buscarTodosClientes() {
+    public List<ClienteEntity> buscarTodosClientes() {
         return clienteService.findAllClientes();
     }
 }
