@@ -59,7 +59,7 @@ public class AgendarView {
                     break;
                 case 6:
                     System.out.println("Saindo do menu de agendamentos.");
-                    return;
+                    break;
             }
         } while(resposta != 6);
     }
