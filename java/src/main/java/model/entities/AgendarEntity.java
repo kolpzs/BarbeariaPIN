@@ -5,7 +5,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "Agendar")
-public class Agendar {
+public class AgendarEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +29,7 @@ public class Agendar {
     @Column(name = "ativo")
     private Boolean ativo;
 
-    public Agendar(Long id, FuncionarioEntity funcionarioEntity, ClienteEntity clienteEntity, ServicoEntity servicoEntity, Date horario, Boolean ativo) {
+    public AgendarEntity(Long id, FuncionarioEntity funcionarioEntity, ClienteEntity clienteEntity, ServicoEntity servicoEntity, Date horario, Boolean ativo) {
         this.id = id;
         this.funcionarioEntity = funcionarioEntity;
         this.clienteEntity = clienteEntity;
@@ -38,7 +38,7 @@ public class Agendar {
         this.ativo = ativo;
     }
 
-    public Agendar(){}
+    public AgendarEntity(){}
 
     // Getters e setters
 

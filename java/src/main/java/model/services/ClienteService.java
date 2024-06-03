@@ -1,5 +1,6 @@
 package model.services;
 
+import model.entities.AgendarEntity;
 import model.entities.ClienteEntity;
 import model.repositories.ClienteRepository;
 
@@ -62,5 +63,13 @@ public class ClienteService {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(telefone);
         return matcher.matches();
+    }
+
+    public ClienteEntity updateById(ClienteEntity cliente) {
+        return clienteRepository.updateById(cliente);
+    }
+
+    public void delete(Long id) {
+        clienteRepository.delete(id);
     }
 }

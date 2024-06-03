@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import controller.AgendarController;
-import model.entities.Agendar;
+import model.entities.AgendarEntity;
 import model.entities.ClienteEntity;
 import model.entities.FuncionarioEntity;
 import model.entities.ServicoEntity;
@@ -78,16 +78,16 @@ public class AgendarView {
         System.out.print("Ativo (true/false): ");
         Boolean ativo = scanner.nextBoolean();
 
-        Agendar novoAgendar = new Agendar();
-        novoAgendar.setFuncionario(funcionario);
-        novoAgendar.setCliente(cliente);
-        novoAgendar.setServico(servico);
-        novoAgendar.setHorario(horario);
-        novoAgendar.setAtivo(ativo);
+        AgendarEntity novoAgendarEntity = new AgendarEntity();
+        novoAgendarEntity.setFuncionario(funcionario);
+        novoAgendarEntity.setCliente(cliente);
+        novoAgendarEntity.setServico(servico);
+        novoAgendarEntity.setHorario(horario);
+        novoAgendarEntity.setAtivo(ativo);
 
         try {
-            Agendar agendarCriado = agendarController.criarAgendar(novoAgendar);
-            if (agendarCriado != null) {
+            AgendarEntity agendarEntityCriado = agendarController.criarAgendar(novoAgendarEntity);
+            if (agendarEntityCriado != null) {
                 System.out.println("Agendamento criado com sucesso!");
             } else {
                 System.out.println("Falha ao criar agendamento.");
@@ -98,26 +98,107 @@ public class AgendarView {
         }
     }
 
-    private void editarAgendamento(Scanner scanner) {
-        // Implemente a lógica para editar um agendamento aqui
+    private void editarAgendamento(Scanner scanner) throws ParseException {
+        System.out.println("Editar Agendamento:");
+
+        System.out.print("ID do Agendamento: ");
+        Long id = scanner.nextLong();
+        scanner.nextLine();  // Consume newline left-over
+
+        AgendarEntity agendarEntity = agendarController.buscarAgendar(id);
+        if (agendarEntity == null) {
+            System.out.println("Agendamento não encontrado.");
+            return;
+        }
+
+        FuncionarioEntity funcionario = new FuncionarioEntity();
+        ClienteEntity cliente = new ClienteEntity();
+        ServicoEntity servico = new ServicoEntity();
+
+        System.out.print("Horário (formato yyyy-MM-dd HH:mm:ss): ");
+        String horarioStr = scanner.nextLine();
+        java.util.Date horario = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(horarioStr);
+
+        System.out.print("Ativo (true/false): ");
+        Boolean ativo = scanner.nextBoolean();
+
+        agendarEntity.setFuncionario(funcionario);
+        agendarEntity.setCliente(cliente);
+        agendarEntity.setServico(servico);
+        agendarEntity.setHorario(horario);
+        agendarEntity.setAtivo(ativo);
+
+        try {
+            AgendarEntity agendarEntityEditado = agendarController.updateById(agendarEntity);
+            if (agendarEntityEditado != null) {
+                System.out.println("Agendamento editado com sucesso!");
+            } else {
+                System.out.println("Falha ao editar agendamento.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Erro ao editar agendamento: " + e.getMessage());
+        }
     }
 
     private void buscarAgendamento(Scanner scanner) {
-        // Implemente a lógica para buscar um único agendamento aqui
+        System.out.println("Buscar Agendamento:");
+
+        System.out.print("ID do Agendamento: ");
+        Long id = scanner.nextLong();
+        scanner.nextLine();  // Consume newline left-over
+
+        AgendarEntity agendar = agendarController.buscarAgendar(id);
+        if (agendar == null) {
+            System.out.println("Agendamento não encontrado.");
+            return;
+        }
+
+        System.out.println("Detalhes do Agendamento:");
+        System.out.println("ID: " + agendar.getId());
+        System.out.println("Funcionario: " + agendar.getFuncionario().getNome());
+        System.out.println("Cliente: " + agendar.getCliente().getNome());
+        System.out.println("Servico: " + agendar.getServico().getNome());
+        System.out.println("Horário: " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(agendar.getHorario()));
+        System.out.println("Ativo: " + (agendar.getAtivo() ? "Sim" : "Não"));
     }
 
     private void excluirAgendamento(Scanner scanner) {
-        // Implemente a lógica para excluir um agendamento aqui
+        System.out.println("Excluir Agendamento:");
+
+        System.out.print("ID do Agendamento: ");
+        Long id = scanner.nextLong();
+        scanner.nextLine();  // Consume newline left-over
+
+        AgendarEntity agendar = agendarController.buscarAgendar(id);
+        if (agendar == null) {
+            System.out.println("Agendamento não encontrado.");
+            return;
+        }
+
+        try {
+            agendarController.delete(id);
+            System.out.println("Agendamento excluído com sucesso!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Erro ao excluir agendamento: " + e.getMessage());
+        }
     }
 
     private void visualizarTodosAgendamentos() {
-        List<Agendar> agendamentos = agendarController.buscarTodosAgendamentos();
+        List<AgendarEntity> agendamentos = agendarController.buscarTodosAgendamentos();
         if (agendamentos.isEmpty()) {
             System.out.println("Nenhum agendamento encontrado.");
         } else {
             System.out.println("Lista de Agendamentos:");
-            for (Agendar agendar : agendamentos) {
-                // Implemente a lógica para visualizar um agendamento aqui
+            for (AgendarEntity agendar : agendamentos) {
+                System.out.println("ID: " + agendar.getId());
+                System.out.println("Funcionario: " + agendar.getFuncionario().getNome());
+                System.out.println("Cliente: " + agendar.getCliente().getNome());
+                System.out.println("Servico: " + agendar.getServico().getNome());
+                System.out.println("Horário: " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(agendar.getHorario()));
+                System.out.println("Ativo: " + (agendar.getAtivo() ? "Sim" : "Não"));
+                System.out.println("------------------------");
             }
         }
     }

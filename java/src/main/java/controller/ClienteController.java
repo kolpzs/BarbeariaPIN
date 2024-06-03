@@ -2,6 +2,7 @@ package controller;
 
 import java.util.List;
 
+import model.entities.AgendarEntity;
 import model.entities.ClienteEntity;
 import model.services.ClienteService;
 
@@ -28,5 +29,13 @@ public class ClienteController {
 
     public List<ClienteEntity> buscarTodosClientes() {
         return clienteService.findAllClientes();
+    }
+
+    public ClienteEntity updateById(ClienteEntity clienteEntity) {
+        return clienteService.updateById(clienteEntity);
+    }
+
+    public void delete(Long id) {
+        clienteService.delete(id);
     }
 }
