@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import controller.FuncionarioController;
-import model.entities.Funcionario;
+import model.entities.FuncionarioEntity;
 
 public class FuncionarioView {
 
@@ -58,8 +58,8 @@ public class FuncionarioView {
         String senha = scanner.nextLine();
 
         try {
-            Funcionario novoFuncionario = funcionarioController.criarFuncionario(nome, login, senha);
-            if (novoFuncionario != null) {
+            FuncionarioEntity novoFuncionarioEntity = funcionarioController.criarFuncionario(nome, login, senha);
+            if (novoFuncionarioEntity != null) {
                 System.out.println("Funcionario criado com sucesso!");
             } else {
                 System.out.println("Falha ao criar funcionário. Talvez o nome já esteja em uso ou a senha seja igual ao nome.");
@@ -71,13 +71,13 @@ public class FuncionarioView {
     }
 
     private void visualizarTodosFuncionarios() {
-        List<Funcionario> funcionarios = funcionarioController.buscarTodosFuncionarios();
-        if (funcionarios.isEmpty()) {
+        List<FuncionarioEntity> funcionarioEntities = funcionarioController.buscarTodosFuncionarios();
+        if (funcionarioEntities.isEmpty()) {
             System.out.println("Nenhum funcionário encontrado.");
         } else {
             System.out.println("Lista de Funcionários:");
-            for (Funcionario funcionario : funcionarios) {
-                System.out.println("ID: " + funcionario.getId() + ", Nome: " + funcionario.getNome() + ", Login: " + funcionario.getLogin());
+            for (FuncionarioEntity funcionarioEntity : funcionarioEntities) {
+                System.out.println("ID: " + funcionarioEntity.getId() + ", Nome: " + funcionarioEntity.getNome() + ", Login: " + funcionarioEntity.getLogin());
             }
         }
     }

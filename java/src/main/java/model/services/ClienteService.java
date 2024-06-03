@@ -1,6 +1,6 @@
 package model.services;
 
-import model.entities.Cliente;
+import model.entities.ClienteEntity;
 import model.repositories.ClienteRepository;
 
 import java.util.List;
@@ -15,41 +15,41 @@ public class ClienteService {
         this.clienteRepository = new ClienteRepository();
     }
 
-    public Cliente createCliente(Cliente cliente) throws Exception {
-        if (clienteExists(cliente.getCpf())) {
+    public ClienteEntity createCliente(ClienteEntity clienteEntity) throws Exception {
+        if (clienteExists(clienteEntity.getCpf())) {
             throw new Exception("Cliente já existe com o CPF fornecido.");
         }
         
-        if (!isTelefoneValido(cliente.getTelefone())) {
+        if (!isTelefoneValido(clienteEntity.getTelefone())) {
             throw new Exception("Número de telefone inválido.");
         }
 
-        return clienteRepository.create(cliente);
+        return clienteRepository.create(clienteEntity);
     }
 
-    public Cliente findClienteById(Long id) {
+    public ClienteEntity findClienteById(Long id) {
         return clienteRepository.findById(id);
     }
 
-    public Cliente updateCliente(Cliente cliente) throws Exception {
-        if (!isTelefoneValido(cliente.getTelefone())) {
+    public ClienteEntity updateCliente(ClienteEntity clienteEntity) throws Exception {
+        if (!isTelefoneValido(clienteEntity.getTelefone())) {
             throw new Exception("Número de telefone inválido.");
         }
 
-        return clienteRepository.updateById(cliente);
+        return clienteRepository.updateById(clienteEntity);
     }
 
     public void deleteCliente(Long id) {
         clienteRepository.delete(id);
     }
 
-    public List<Cliente> findAllClientes() {
+    public List<ClienteEntity> findAllClientes() {
         return clienteRepository.findAll();
     }
 
     private boolean clienteExists(String cpf) {
-        List<Cliente> clientes = clienteRepository.findAll();
-        for (Cliente c : clientes) {
+        List<ClienteEntity> clienteEntities = clienteRepository.findAll();
+        for (ClienteEntity c : clienteEntities) {
             if (c.getCpf().equals(cpf)) {
                 return true;
             }

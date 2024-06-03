@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import controller.ServicoController;
-import model.entities.Servico;
+import model.entities.ServicoEntity;
 
 public class ServicoView {
 
@@ -49,8 +49,8 @@ public class ServicoView {
         String nome = scanner.nextLine();
 
         try {
-            Servico novoServico = servicoController.criarServico(nome);
-            if (novoServico != null) {
+            ServicoEntity novoServicoEntity = servicoController.criarServico(nome);
+            if (novoServicoEntity != null) {
                 System.out.println("Servico criado com sucesso!");
             } else {
                 System.out.println("Falha ao criar serviço. O nome já está em uso.");
@@ -62,13 +62,13 @@ public class ServicoView {
     }
 
     private void visualizarTodosServicos() {
-        List<Servico> servicos = servicoController.buscarTodosServicos();
-        if (servicos.isEmpty()) {
+        List<ServicoEntity> servicoEntities = servicoController.buscarTodosServicos();
+        if (servicoEntities.isEmpty()) {
             System.out.println("Nenhum serviço encontrado.");
         } else {
             System.out.println("Lista de Serviços:");
-            for (Servico servico : servicos) {
-                System.out.println("ID: " + servico.getId() + ", Nome: " + servico.getNome());
+            for (ServicoEntity servicoEntity : servicoEntities) {
+                System.out.println("ID: " + servicoEntity.getId() + ", Nome: " + servicoEntity.getNome());
             }
         }
     }

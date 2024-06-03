@@ -2,7 +2,7 @@ package controller;
 
 import java.util.List;
 
-import model.entities.Funcionario;
+import model.entities.FuncionarioEntity;
 import model.services.FuncionarioService;
 import model.repositories.FuncionarioRepository;
 
@@ -15,7 +15,7 @@ public class FuncionarioController {
         this.funcionarioService = new FuncionarioService(funcionarioRepository);
     }
 
-    public Funcionario criarFuncionario(String nome, String login, String senha) {
+    public FuncionarioEntity criarFuncionario(String nome, String login, String senha) {
         try {
             return funcionarioService.criarFuncionario(nome, login, senha);
         } catch (Exception e) {
@@ -24,11 +24,11 @@ public class FuncionarioController {
         }
     }
 
-    public Funcionario buscarFuncionario(Long id) {
+    public FuncionarioEntity buscarFuncionario(Long id) {
         return funcionarioService.findById(id);
     }
 
-    public List<Funcionario> buscarTodosFuncionarios() {
+    public List<FuncionarioEntity> buscarTodosFuncionarios() {
         return funcionarioService.findAll();
     }
 }

@@ -2,7 +2,7 @@ package model.services;
 
 import java.util.List;
 
-import model.entities.Servico;
+import model.entities.ServicoEntity;
 import model.repositories.ServicoRepository;
 
 public class ServicoService {
@@ -13,25 +13,25 @@ public class ServicoService {
         this.servicoRepository = new ServicoRepository();
     }
 
-    public boolean createServico(Servico servico) {
-        if (isNomeExistente(servico.getNome())) {
+    public boolean createServico(ServicoEntity servicoEntity) {
+        if (isNomeExistente(servicoEntity.getNome())) {
             return false; 
         }
-        servicoRepository.create(servico);
+        servicoRepository.create(servicoEntity);
         return true;
     }
 
-    public boolean updateServico(Servico servico) {
-        if (isNomeExistente(servico.getNome())) {
+    public boolean updateServico(ServicoEntity servicoEntity) {
+        if (isNomeExistente(servicoEntity.getNome())) {
             return false; 
         }
-        servicoRepository.updateById(servico);
+        servicoRepository.updateById(servicoEntity);
         return true;
     }
 
     private boolean isNomeExistente(String nome) {
-        List<Servico> servicos = servicoRepository.findAll();
-        for (Servico s : servicos) {
+        List<ServicoEntity> servicoEntities = servicoRepository.findAll();
+        for (ServicoEntity s : servicoEntities) {
             if (s.getNome().equalsIgnoreCase(nome)) {
                 return true;
             }
@@ -39,11 +39,11 @@ public class ServicoService {
         return false;
     }
 
-    public Servico findById(Long id) {
+    public ServicoEntity findById(Long id) {
         return servicoRepository.findById(id);
     }
 
-    public List<Servico> findAll() {
+    public List<ServicoEntity> findAll() {
         return servicoRepository.findAll();
     }
 

@@ -13,15 +13,15 @@ public class Agendar {
 
     @ManyToOne
     @JoinColumn(name = "funcionario_id_fk", nullable = false)
-    private Funcionario funcionario;
+    private FuncionarioEntity funcionarioEntity;
 
     @ManyToOne
     @JoinColumn(name = "cliente_id_fk", nullable = false)
-    private Cliente cliente;
+    private ClienteEntity clienteEntity;
 
     @ManyToOne
     @JoinColumn(name = "servico_id_fk", nullable = false)
-    private Servico servico;
+    private ServicoEntity servicoEntity;
 
     @Column(name = "horario")
     private java.util.Date horario;
@@ -29,11 +29,11 @@ public class Agendar {
     @Column(name = "ativo")
     private Boolean ativo;
 
-    public Agendar(Long id, Funcionario funcionario, Cliente cliente, Servico servico, Date horario, Boolean ativo) {
+    public Agendar(Long id, FuncionarioEntity funcionarioEntity, ClienteEntity clienteEntity, ServicoEntity servicoEntity, Date horario, Boolean ativo) {
         this.id = id;
-        this.funcionario = funcionario;
-        this.cliente = cliente;
-        this.servico = servico;
+        this.funcionarioEntity = funcionarioEntity;
+        this.clienteEntity = clienteEntity;
+        this.servicoEntity = servicoEntity;
         this.horario = horario;
         this.ativo = ativo;
     }
@@ -50,28 +50,28 @@ public class Agendar {
         this.id = id;
     }
 
-    public Funcionario getFuncionario() {
-        return funcionario;
+    public FuncionarioEntity getFuncionario() {
+        return funcionarioEntity;
     }
 
-    public void setFuncionario(Funcionario funcionario) {
-        this.funcionario = funcionario;
+    public void setFuncionario(FuncionarioEntity funcionarioEntity) {
+        this.funcionarioEntity = funcionarioEntity;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public ClienteEntity getCliente() {
+        return clienteEntity;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setCliente(ClienteEntity clienteEntity) {
+        this.clienteEntity = clienteEntity;
     }
 
-    public Servico getServico() {
-        return servico;
+    public ServicoEntity getServico() {
+        return servicoEntity;
     }
 
-    public void setServico(Servico servico) {
-        this.servico = servico;
+    public void setServico(ServicoEntity servicoEntity) {
+        this.servicoEntity = servicoEntity;
     }
 
     public Date getHorario() {
