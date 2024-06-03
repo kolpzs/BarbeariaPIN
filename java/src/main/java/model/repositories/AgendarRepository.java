@@ -1,10 +1,9 @@
 package model.repositories;
 
-import model.entities.Agendar;
+import model.entities.AgendarEntity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import java.util.List;
@@ -19,41 +18,41 @@ public class AgendarRepository implements BasicCrud {
     }
 
     @Override
-    public Agendar create(Object object) {
-        Agendar agendar = (Agendar) object;
+    public AgendarEntity create(Object object) {
+        AgendarEntity agendarEntity = (AgendarEntity) object;
         em.getTransaction().begin();
-        em.persist(agendar);
+        em.persist(agendarEntity);
         em.getTransaction().commit();
-        return agendar;
+        return agendarEntity;
     }
 
     @Override
-    public Agendar findById(Long id) {
-        return em.find(Agendar.class, id);
+    public AgendarEntity findById(Long id) {
+        return em.find(AgendarEntity.class, id);
     }
 
     @Override
-    public Agendar updateById(Object object) {
-        Agendar agendar = (Agendar) object;
+    public AgendarEntity updateById(Object object) {
+        AgendarEntity agendarEntity = (AgendarEntity) object;
         em.getTransaction().begin();
-        Agendar updatedAgendar = em.merge(agendar);
+        AgendarEntity updatedAgendarEntity = em.merge(agendarEntity);
         em.getTransaction().commit();
-        return updatedAgendar;
+        return updatedAgendarEntity;
     }
 
     @Override
     public void delete(Long id) {
-        Agendar agendar = findById(id);
-        if (agendar != null) {
+        AgendarEntity agendarEntity = findById(id);
+        if (agendarEntity != null) {
             em.getTransaction().begin();
-            em.remove(agendar);
+            em.remove(agendarEntity);
             em.getTransaction().commit();
         }
     }
 
     @Override
-    public List<Agendar> findAll() {
-        TypedQuery<Agendar> query = em.createQuery("SELECT a FROM Agendar a", Agendar.class);
+    public List<AgendarEntity> findAll() {
+        TypedQuery<AgendarEntity> query = em.createQuery("SELECT a FROM Agendar a", AgendarEntity.class);
         return query.getResultList();
     }
 

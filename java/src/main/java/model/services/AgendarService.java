@@ -2,7 +2,7 @@ package model.services;
 
 import java.util.List;
 
-import model.entities.Agendar;
+import model.entities.AgendarEntity;
 import model.repositories.AgendarRepository;
 
 public class AgendarService {
@@ -13,17 +13,25 @@ public class AgendarService {
         this.agendarRepository = agendarRepository;
     }
 
-    public Agendar criarAgendar(Agendar agendar) throws Exception {
+    public AgendarEntity criarAgendar(AgendarEntity agendarEntity) throws Exception {
         // Adicione aqui as validações necessárias antes de criar um agendamento
-        return (Agendar) agendarRepository.create(agendar);
+        return (AgendarEntity) agendarRepository.create(agendarEntity);
     }
 
-    public Agendar findById(Long id) {
+    public AgendarEntity findById(Long id) {
         return agendarRepository.findById(id);
     }
 
-    public List<Agendar> findAll() {
+    public List<AgendarEntity> findAll() {
         return agendarRepository.findAll();
+    }
+
+    public AgendarEntity updateById(AgendarEntity agendar) {
+        return agendarRepository.updateById(agendar);
+    }
+
+    public void delete(Long id) {
+        agendarRepository.delete(id);
     }
 
 }
