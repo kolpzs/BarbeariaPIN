@@ -61,16 +61,21 @@ public class ClienteView {
 
     private void criarCliente(Scanner scanner) {
         System.out.println("Criar Cliente:");
-        System.out.print("Nome: ");
+        System.out.println("Nome: ");
         String nome = scanner.nextLine();
-        System.out.print("CPF: ");
+        scanner.nextLine();
+        System.out.println("CPF: ");
         String cpf = scanner.nextLine();
-        System.out.print("Telefone: ");
+        scanner.nextLine();
+        System.out.println("Telefone: ");
         String telefone = scanner.nextLine();
-        System.out.print("Email: ");
+        scanner.nextLine();
+        System.out.println("Email: ");
         String email = scanner.nextLine();
-        System.out.print("Preferência: ");
+        scanner.nextLine();
+        System.out.println("Preferência: ");
         String preferencia = scanner.nextLine();
+        scanner.nextLine();
         try {
             ClienteEntity novoClienteEntity = clienteController.criarCliente(nome, telefone, cpf, email, preferencia);
             if (novoClienteEntity != null) {
@@ -86,9 +91,9 @@ public class ClienteView {
     private void editarCliente(Scanner scanner) {
         System.out.println("Editar Cliente:");
 
-        System.out.print("ID do Cliente: ");
+        System.out.println("ID do Cliente: ");
         Long id = scanner.nextLong();
-        scanner.nextLine();  // Consume newline left-over
+        scanner.nextLine();
 
         ClienteEntity clienteEntity = clienteController.buscarCliente(id);
         if (clienteEntity == null) {
@@ -96,16 +101,21 @@ public class ClienteView {
             return;
         }
 
-        System.out.print("Nome: ");
+        System.out.println("Nome: ");
         String nome = scanner.nextLine();
-        System.out.print("CPF: ");
+        scanner.nextLine();
+        System.out.println("CPF: ");
         String cpf = scanner.nextLine();
-        System.out.print("Telefone: ");
+        scanner.nextLine();
+        System.out.println("Telefone: ");
         String telefone = scanner.nextLine();
-        System.out.print("Email: ");
+        scanner.nextLine();
+        System.out.println("Email: ");
         String email = scanner.nextLine();
-        System.out.print("Preferência: ");
+        scanner.nextLine();
+        System.out.println("Preferência: ");
         String preferencia = scanner.nextLine();
+        scanner.nextLine();
 
         clienteEntity.setNome(nome);
         clienteEntity.setCpf(cpf);
@@ -131,7 +141,7 @@ public class ClienteView {
 
         System.out.print("ID do Cliente: ");
         Long id = scanner.nextLong();
-        scanner.nextLine();  // Consume newline left-over
+        scanner.nextLine();
 
         ClienteEntity clienteEntity = clienteController.buscarCliente(id);
         if (clienteEntity == null) {
@@ -154,7 +164,7 @@ public class ClienteView {
 
         System.out.print("ID do Cliente: ");
         Long id = scanner.nextLong();
-        scanner.nextLine();  // Consume newline left-over
+        scanner.nextLine();
 
         ClienteEntity clienteEntity = clienteController.buscarCliente(id);
         if (clienteEntity == null) {
