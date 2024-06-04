@@ -43,7 +43,7 @@ public class FuncionarioView {
                     break;
                 case 3:
                     System.out.println("Saindo do menu de funcionários.");
-                    return;
+                    break;
             }
         } while(resposta != 3);
     }

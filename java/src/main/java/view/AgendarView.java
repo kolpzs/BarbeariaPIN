@@ -14,6 +14,7 @@ import model.entities.ServicoEntity;
 public class AgendarView {
 
     private AgendarController agendarController;
+    private final Scanner scanner = new Scanner(System.in);
 
     public AgendarView() {
         this.agendarController = new AgendarController();
@@ -21,7 +22,6 @@ public class AgendarView {
 
     public void mostrarMenuAgendar() throws ParseException {
 
-        Scanner scanner = new Scanner(System.in);
         int resposta;
 
         do {
@@ -35,6 +35,7 @@ public class AgendarView {
 
             do {
                 resposta = scanner.nextInt();
+                scanner.nextLine();
                 if(resposta < 1 || resposta > 6) {
                     System.out.println("Insira uma opção válida: ");
                 }
@@ -64,7 +65,8 @@ public class AgendarView {
         } while(resposta != 6);
     }
 
-    private void criarAgendamento(Scanner scanner) throws ParseException {
+
+private void criarAgendamento(Scanner scanner) throws ParseException {
         System.out.println("Criar Agendamento:");
 
         FuncionarioEntity funcionario = new FuncionarioEntity();
@@ -73,10 +75,9 @@ public class AgendarView {
 
         System.out.print("Horário (formato yyyy-MM-dd HH:mm:ss): ");
         String horarioStr = scanner.nextLine();
+        scanner.nextLine();
         java.util.Date horario = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(horarioStr);
-
-        System.out.print("Ativo (true/false): ");
-        Boolean ativo = scanner.nextBoolean();
+        Boolean ativo = true;
 
         AgendarEntity novoAgendarEntity = new AgendarEntity();
         novoAgendarEntity.setFuncionario(funcionario);
@@ -101,9 +102,9 @@ public class AgendarView {
     private void editarAgendamento(Scanner scanner) throws ParseException {
         System.out.println("Editar Agendamento:");
 
-        System.out.print("ID do Agendamento: ");
+        System.out.println("ID do Agendamento: ");
         Long id = scanner.nextLong();
-        scanner.nextLine();  // Consume newline left-over
+        scanner.nextLine();
 
         AgendarEntity agendarEntity = agendarController.buscarAgendar(id);
         if (agendarEntity == null) {
@@ -118,9 +119,7 @@ public class AgendarView {
         System.out.print("Horário (formato yyyy-MM-dd HH:mm:ss): ");
         String horarioStr = scanner.nextLine();
         java.util.Date horario = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(horarioStr);
-
-        System.out.print("Ativo (true/false): ");
-        Boolean ativo = scanner.nextBoolean();
+        Boolean ativo = true;
 
         agendarEntity.setFuncionario(funcionario);
         agendarEntity.setCliente(cliente);
@@ -144,9 +143,9 @@ public class AgendarView {
     private void buscarAgendamento(Scanner scanner) {
         System.out.println("Buscar Agendamento:");
 
-        System.out.print("ID do Agendamento: ");
+        System.out.println("ID do Agendamento: ");
         Long id = scanner.nextLong();
-        scanner.nextLine();  // Consume newline left-over
+        scanner.nextLine();
 
         AgendarEntity agendar = agendarController.buscarAgendar(id);
         if (agendar == null) {
@@ -166,9 +165,9 @@ public class AgendarView {
     private void excluirAgendamento(Scanner scanner) {
         System.out.println("Excluir Agendamento:");
 
-        System.out.print("ID do Agendamento: ");
+        System.out.println("ID do Agendamento: ");
         Long id = scanner.nextLong();
-        scanner.nextLine();  // Consume newline left-over
+        scanner.nextLine();
 
         AgendarEntity agendar = agendarController.buscarAgendar(id);
         if (agendar == null) {
