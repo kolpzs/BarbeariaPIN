@@ -31,4 +31,8 @@ public class FuncionarioController {
     public List<FuncionarioEntity> buscarTodosFuncionarios() {
         return funcionarioService.findAll();
     }
+
+    public void deletarFuncionario(Long id) {
+        funcionarioService.delete(id);
+    }
 }

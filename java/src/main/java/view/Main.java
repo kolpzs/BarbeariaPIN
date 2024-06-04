@@ -10,6 +10,7 @@ public class Main {
         ClienteView clienteView = new ClienteView();
         ServicoView servicoView = new ServicoView();
         AgendarView agendarView = new AgendarView();
+        DisponibilidadeView disponibilidadeView = new DisponibilidadeView();
         Scanner respostaMain = new Scanner(System.in);
         int resposta;
 
@@ -38,7 +39,7 @@ public class Main {
                     clienteView.mostrarMenuCliente();
                     break;
                 case 3:
-                     //disponibilidadeView.mostrarMenuDisponibilidade();  // Atualizado
+                     disponibilidadeView.mostrarMenuDisponibilidade();
                     break;
                 case 4:
                     agendarView.mostrarMenuAgendar();

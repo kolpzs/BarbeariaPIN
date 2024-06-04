@@ -5,11 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Scanner;
 
+import controller.AgendarClienteController;
 import controller.AgendarController;
-import model.entities.AgendarEntity;
-import model.entities.ClienteEntity;
-import model.entities.FuncionarioEntity;
-import model.entities.ServicoEntity;
+import model.entities.*;
 
 public class AgendarView {
 
@@ -66,16 +64,16 @@ public class AgendarView {
     }
 
 
-private void criarAgendamento(Scanner scanner) throws ParseException {
+    private void criarAgendamento(Scanner scanner) throws ParseException {
         System.out.println("Criar Agendamento:");
 
         FuncionarioEntity funcionario = new FuncionarioEntity();
         ClienteEntity cliente = new ClienteEntity();
         ServicoEntity servico = new ServicoEntity();
+        AgendarClienteController agendarClienteController = new AgendarClienteController();
 
         System.out.print("Horário (formato yyyy-MM-dd HH:mm:ss): ");
         String horarioStr = scanner.nextLine();
-        scanner.nextLine();
         java.util.Date horario = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(horarioStr);
         Boolean ativo = true;
 
@@ -90,6 +88,19 @@ private void criarAgendamento(Scanner scanner) throws ParseException {
             AgendarEntity agendarEntityCriado = agendarController.criarAgendar(novoAgendarEntity);
             if (agendarEntityCriado != null) {
                 System.out.println("Agendamento criado com sucesso!");
+
+                // Adicionar cliente ao AgendarCliente
+                System.out.println("Associar cliente ao agendamento:");
+                System.out.print("ID do Cliente: ");
+                Long cliente_id = scanner.nextLong();
+                scanner.nextLine();
+
+                AgendarClienteEntity agendarClienteEntityCriado = agendarClienteController.criarAgendarCliente(agendarEntityCriado.getId(), cliente_id);
+                if (agendarClienteEntityCriado != null) {
+                    System.out.println("Cliente associado ao agendamento com sucesso!");
+                } else {
+                    System.out.println("Falha ao associar cliente ao agendamento.");
+                }
             } else {
                 System.out.println("Falha ao criar agendamento.");
             }
@@ -98,6 +109,7 @@ private void criarAgendamento(Scanner scanner) throws ParseException {
             System.out.println("Erro ao criar agendamento: " + e.getMessage());
         }
     }
+
 
     private void editarAgendamento(Scanner scanner) throws ParseException {
         System.out.println("Editar Agendamento:");

@@ -29,9 +29,12 @@ public class FuncionarioService {
     public FuncionarioEntity findById(Long id) {
         return funcionarioRepository.findById(id);
     }
-    
+
     public List<FuncionarioEntity> findAll() {
         return funcionarioRepository.findAll();
     }
-    
+
+    public void delete(Long id) {
+        funcionarioRepository.delete(id);
+    }
 }
