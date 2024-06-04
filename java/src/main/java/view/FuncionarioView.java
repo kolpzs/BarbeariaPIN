@@ -58,8 +58,8 @@ public class FuncionarioView {
         String senha = scanner.nextLine();
 
         try {
-            FuncionarioEntity novoFuncionarioEntity = funcionarioController.criarFuncionario(nome, login, senha);
-            if (novoFuncionarioEntity != null) {
+            FuncionarioEntity novoFuncionario = funcionarioController.criarFuncionario(nome, login, senha);
+            if (novoFuncionario != null) {
                 System.out.println("Funcionario criado com sucesso!");
             } else {
                 System.out.println("Falha ao criar funcionário. Talvez o nome já esteja em uso ou a senha seja igual ao nome.");
